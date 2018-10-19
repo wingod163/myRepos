@@ -163,13 +163,13 @@ from (select d2.prov_code  --省编码
         group by d2.prov_code
         ,d2.city_code) t1
         left join (select t.prov_code
-               ,t.city_code
-               ,t.register_num   --注册用户数
-               from pdwd.tdwd_register_user_num_city t 
-               where t.deal_date=${v_thisyyyymmdd:0:6} 
-               and t.resource='jituan') t2 
-               on t1.prov_code=t2.prov_code 
-               and cast(t1.city_code as bigint)=t2.city_code
+                   ,t.city_code
+                   ,t.register_num   --注册用户数
+                   from pdwd.tdwd_register_user_num_city t 
+                   where t.deal_date=${v_thisyyyymmdd:0:6} 
+                   and t.resource='jituan') t2 
+                   on t1.prov_code=t2.prov_code 
+                   and cast(t1.city_code as bigint)=t2.city_code
         left join (select t.prov_code
                    ,t.city_code
                    ,count(distinct case when t.create_date like '%${v_thisyyyy}-${v_thismm}-${v_thisdd}%' then serial_number end) as index1  --新增活跃用户数
